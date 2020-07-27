@@ -13,7 +13,7 @@ export const clientPOST = async (method, params, forceUrl = false) => {
 
   return await axios({
     method: 'post',
-    url: forceurl ? method : baseURL + "/" + method,
+    url: forceUrl ? method : baseURL + "/" + method,
     data: params,
     headers: headers
   }).then(res => {
@@ -22,24 +22,25 @@ export const clientPOST = async (method, params, forceUrl = false) => {
     });
   }).catch(error => {
     return new Promise((resolve, reject) => {
-      reject(error);
+      reject(error.response);
     })
   });
 };
 
 export const clientGET = async (method, params, forceUrl = false) => {
   let token = await get('token');
-  let headers = { 'Content-Type': 'application/json' };
+  let headers = {};
   if (!token) {
     token = defaultToken;
   }
 
   headers = { ...headers, 'Authorization': `Bearer ${token}`}
-
+  let url = forceUrl ? method : baseURL + "/" + method;
+  
   return await axios({
     method: 'get',
-    url: forceurl ? method : baseURL + "/" + method,
-    data: params,
+    url: url,
+    params: params,
     headers: headers
   }).then(res => {
     return new Promise((resolve, reject) => {
@@ -47,7 +48,7 @@ export const clientGET = async (method, params, forceUrl = false) => {
     });
   }).catch(error => {
     return new Promise((resolve, reject) => {
-      reject(error);
+      reject(error.response);
     })
   });
 }

@@ -1,16 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
-import { View, TextInput, Image, ImageBackground, StyleSheet } from 'react-native';
-import { Input, Text, Button } from 'react-native-elements';
-import { SafeAreaView } from 'react-navigation';
+import { View, Text, TextInput, Image, ImageBackground, StyleSheet } from 'react-native';
+import { Button } from 'react-native-elements';
+
+import { useForm, Controller } from "react-hook-form";
+
+//Custom
+import Row from '../../components/Row';
+import ErrorMessage from '../../components/ErrorMessage';
+import { mainStyles } from '../../constants/styles';
 
 import {
   login
 } from './redux/actions'
 
-const LoginScreen = () => {
-  const [phone, setPhone] = useState("");
+const LoginScreen = ({ login,  loading, response }) => {
+  const { control, handleSubmit, errors } = useForm();
+
+  const onSubmit = (data) => {
+    login(data);
+  }
 
   return (
     <View style={styles.mainContainer}>
@@ -18,26 +28,40 @@ const LoginScreen = () => {
         source={require('../../assets/images/login-background1.jpg')}
         style={styles.backgroundImage}
       >
-        <View style={styles.container}>
+        <View style={styles.coverContent}>
           <View style={styles.formContainer}>
             <Image
               source={require('../../assets/images/logo.png')}
               style={styles.logo}
             />
-
-            <TextInput
-              style={styles.input}
-              placeholder="Escribe tu número"
-              value={phone}
-              onChangeText={setPhone}
-              autoCapitalize="none"
-              autoCorrect={false}
-            />
+            <Row>
+              <Controller
+                control={control}
+                render={({ onChange, onBlur, value }) => (
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Escribe tu número"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    keyboardType="phone-pad"
+                    value={value}
+                  />
+                )}
+                name="phone"
+                rules={{ required: true, maxLength: 20 }}
+                defaultValue="3137022267"
+              />
+              <ErrorMessage errors={errors} field="phone"/>
+            </Row>
 
             <Button
-              buttonStyle={styles.button}
+              buttonStyle={styles.buttonOrange}
+              titleStyle={styles.buttonTitleOrange}
+              disabled={loading}
               title="Recibir código por SMS"
-              onPress={() => { }}
+              onPress={handleSubmit(onSubmit)}
             />
           </View>
         </View>
@@ -55,47 +79,35 @@ LoginScreen.navigationOptions = () => {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    flexDirection: "column"
+    flexDirection: "column",
   },
   backgroundImage: {
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center"
   },
-  container: {
+  coverContent: {
     padding: 10,
     flexDirection: "column"
   },
   formContainer: {
-    backgroundColor: 'rgba(256, 256, 256, .5)',
+    backgroundColor: 'rgba(255, 255, 255, .3)',
     borderRadius: 5,
     width: '100%',
     alignSelf: 'center',
     padding: 20
   },
   logo: {
-    width: 180,
-    height: 70,
+    width: 150,
+    height: 60,
     alignSelf: 'center',
     margin: 10
   },
-  input: {
-    fontSize: 20,
-    backgroundColor: '#FFFFFF',
-    height: 50,
-    borderColor: 'gray',
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 5
-  },
-  button: {
-    height: 50,
-    backgroundColor: '#FA9441'
-  }
+  ...mainStyles
 });
 
-const mapStateToProps = ({ login }) => {
-  const { loginResponse, loginLoading } = login;
+const mapStateToProps = ({ loginRedux }) => {
+  const { loginResponse, loginLoading } = loginRedux;
   return {
     loading: loginLoading,
     response: loginResponse

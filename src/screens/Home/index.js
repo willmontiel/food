@@ -1,17 +1,36 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import { connect } from 'react-redux';
 
-const HomeScreen = () => {
+import { View, Text, StyleSheet, Button } from 'react-native';
+//Custom
+import { mainStyles } from '../../constants/styles';
+
+const HomeScreen = ({ navigation }) => {
   return (
-    <SafeAreaView forceInset={{ top: 'always' }}>
-      <Text>
-        Home
-      </Text>
-    </SafeAreaView>
+    <>
+      <View style={styles.container}>
+        <Button
+          title="Restaurantes"
+          onPress={() => {
+            navigation.navigate('Places', {});
+          }}
+        />
+      </View>
+    </>
   )
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  ...mainStyles
+});
 
-export default HomeScreen;
+const mapStateToProps = () => {
+  return {
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  {
+  }
+)(HomeScreen);

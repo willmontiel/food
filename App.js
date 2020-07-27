@@ -29,7 +29,6 @@ const homeFlow = createStackNavigator({
 });
 
 homeFlow.navigationOptions = {
-  title: 'Home',
   tabBarIcon: <FontAwesome name="home" size={20} />
 }
 

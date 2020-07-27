@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
-import login from '../screens/Login/redux/reducer';
+import loginRedux from '../screens/Login/redux/reducer';
+import placesRedux from '../screens/Places/redux/reducer';
 
-const reducers = combineReducers({ login });
+const reducers = combineReducers({ loginRedux, placesRedux });
 export default reducers;

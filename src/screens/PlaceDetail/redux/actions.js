@@ -1,0 +1,4 @@
+import {
+  PLACE_DETAIL_SCREEN_GET_DETAIL,
+  PLACE_DETAIL_SCREEN_GET_DETAIL_RESULT
+} from './actionTypes';

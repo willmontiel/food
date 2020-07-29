@@ -9,6 +9,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { FontAwesome } from '@expo/vector-icons';
 //Screens
+import ResolveAuthScreen from './src/screens/ResolveAuth';
 import LoginScreen from './src/screens/Login';
 import AccountScreen from './src/screens/Account';
 import HomeScreen from './src/screens/Home';
@@ -21,6 +22,7 @@ import { configureStore } from './src/redux/store';
 //Custom Navigator
 import { setNavigator } from './src/navigationRef';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Alert from './src/components/Alert';
 
 const homeFlow = createStackNavigator({
   Home: HomeScreen,
@@ -29,6 +31,7 @@ const homeFlow = createStackNavigator({
 });
 
 homeFlow.navigationOptions = {
+  title: 'Home',
   tabBarIcon: <FontAwesome name="home" size={20} />
 }
 
@@ -44,6 +47,7 @@ ordersFlow.navigationOptions = {
 
 
 const switchNavigator = createSwitchNavigator({
+  ResolveAuth: ResolveAuthScreen,
   loginFlow: createStackNavigator({
     Login: LoginScreen
   }),
@@ -61,6 +65,7 @@ export default () => {
     <Provider store={configureStore()}>
       <SafeAreaProvider>
         <App ref={(navigator) => { setNavigator(navigator) }} />
+        <Alert />
       </SafeAreaProvider>
     </Provider>
   )

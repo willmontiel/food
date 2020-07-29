@@ -36,6 +36,15 @@ export const mainStyles = StyleSheet.create({
     flexDirection: "column",
     padding: 10
   },
+  rowContainer: {
+    flexDirection: "row"
+  },
+  columnContainer: {
+    flexDirection: "column"
+  },
+  spaceBetween: {
+    justifyContent: 'space-between'
+  },
   ...inputs,
   ...buttons
 });

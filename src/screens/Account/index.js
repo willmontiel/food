@@ -1,15 +1,25 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { FontAwesome } from '@expo/vector-icons';
+import { mainStyles } from '../../constants/styles';
+import { logout } from '../Login/redux/actions';
 
-const AccountScreen = () => {
+const AccountScreen = ({ logout }) => {
   return (
-    <SafeAreaView forceInset={{top: 'always'}}>
-      <Text>
-        Account
-      </Text>
-    </SafeAreaView>
+    <>
+      <View style={{ ...styles.container, marginTop: 20 }}>
+        <Text>Mi Cuenta</Text>
+
+        <TouchableOpacity
+          onPress={logout}
+        >
+          <Text>Cerrar sesión</Text>
+        </TouchableOpacity>
+      </View>
+    </>
   )
 }
 
@@ -19,6 +29,20 @@ AccountScreen.navigationOptions = {
 };
 
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  ...mainStyles
+});
 
-export default AccountScreen;
+const mapStateToProps = ({ authRedux }) => {
+  const { user } = authRedux;
+  return {
+    user
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  {
+    logout
+  }
+)(AccountScreen);

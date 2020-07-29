@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { View, Text, TextInput, Image, ImageBackground, StyleSheet } from 'react-native';
@@ -15,7 +15,7 @@ import {
   login
 } from './redux/actions'
 
-const LoginScreen = ({ login,  loading, response }) => {
+const LoginScreen = ({ login,  loading }) => {
   const { control, handleSubmit, errors } = useForm();
 
   const onSubmit = (data) => {
@@ -106,11 +106,10 @@ const styles = StyleSheet.create({
   ...mainStyles
 });
 
-const mapStateToProps = ({ loginRedux }) => {
-  const { loginResponse, loginLoading } = loginRedux;
+const mapStateToProps = ({ authRedux }) => {
+  const { loginLoading } = authRedux;
   return {
-    loading: loginLoading,
-    response: loginResponse
+    loading: loginLoading
   }
 }
 

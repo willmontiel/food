@@ -1,13 +1,14 @@
-import { baseURL, defaultToken } from '../constants/default';
+import { baseURL } from '../constants/default';
 import axios from 'axios';
 import { get } from './storage';
+import { navigate } from '../navigationRef';
 
 export const clientPOST = async (method, params, forceUrl = false) => {
-  let token = await get('token');
+  const token = await get('token');
   let headers = { 'Content-Type': 'application/json' };
   if (!token) {
-    token = defaultToken;
-  }
+    navigate('loginFlow');
+  } 
 
   headers = { ...headers, 'Authorization': `Bearer ${token}`}
 
@@ -28,10 +29,11 @@ export const clientPOST = async (method, params, forceUrl = false) => {
 };
 
 export const clientGET = async (method, params, forceUrl = false) => {
-  let token = await get('token');
+  const token = await get('token');
+  
   let headers = {};
   if (!token) {
-    token = defaultToken;
+    navigate('loginFlow');
   }
 
   headers = { ...headers, 'Authorization': `Bearer ${token}`}

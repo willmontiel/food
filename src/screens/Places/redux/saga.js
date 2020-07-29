@@ -12,15 +12,16 @@ import {
 } from './actions';
 
 function* searchPlacesRequest({ payload }) {
-  const { searchText } = payload;
+  const { searchText, categories } = payload;
   try {
     const response = yield call(
       clientGET,
       "search",
       {
         limit: 50,
-        term: searchText,
-        location: 'san jose'
+        term: searchText || "",
+        location: 'san jose',
+        categories: categories || ""
       }
     );
 

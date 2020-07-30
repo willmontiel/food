@@ -2,6 +2,7 @@ import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
 import { set, get, remove } from '../../../utils/storage';
 import { clientPost, clientGet } from '../../../utils/restHelper';
 import { navigate } from '../../../navigationRef';
+import { showAlert } from '../../../redux/common/actions';
 
 import {
   LOGIN_SCREEN_LOGIN,
@@ -18,15 +19,23 @@ function* loginRequest({ payload }) {
   try {
     let user = {};
     if (phone === "3137022267") {
-      user = {token: 'snqYjWosG8JBbEIlcPxraEUNAdjjphSlj2tkCHbaIv_LUoFqTN-VfBKvw1L2ZlXXIHTP33o2Ep4q9t8laRK9lJuoYirnfB37RGwJkYD7JDMYxEC2CV5KAB6ME6sVX3Yx'};
+      user = { 
+        token: 'snqYjWosG8JBbEIlcPxraEUNAdjjphSlj2tkCHbaIv_LUoFqTN-VfBKvw1L2ZlXXIHTP33o2Ep4q9t8laRK9lJuoYirnfB37RGwJkYD7JDMYxEC2CV5KAB6ME6sVX3Yx',
+        mainAddress: "Calle 17 # 33 - 58",
+        addressess: [
+          
+        ]
+      };
       yield call(set, "token", user.token);
-    } 
-
-    yield put(loginResult(user));
-    navigate('mainFlow');
-  } catch(e) {
-    console.log('loginRequest : ', error);
+      yield put(loginResult(user));
+    } else {
+      console.log("Not equal")
+      yield put(loginResult({error: true, message: "Usuario o contraseña incorrecta", data: ""}));
+    }
+  } catch (e) {
+    console.log('loginRequest : ', e);
     yield put(loginResult(null));
+    yield put(showAlert({title: "Error", message: e, cancelText: "Aceptar"}));
   }
 }
 
@@ -34,8 +43,8 @@ function* logout() {
   try {
     yield call(remove, "token");
     navigate('loginFlow');
-  } catch(e) {
-    console.log('logout : ', error);
+  } catch (e) {
+    console.log('logout : ', e);
   }
 }
 
@@ -48,8 +57,8 @@ function* autoLogin() {
     } else {
       navigate('loginFlow');
     }
-  } catch(e) {
-    console.log('autoLogin : ', error);
+  } catch (e) {
+    console.log('autoLogin : ', e);
   }
 }
 

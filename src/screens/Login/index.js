@@ -10,13 +10,24 @@ import { useForm, Controller } from "react-hook-form";
 import Row from '../../components/Row';
 import ErrorMessage from '../../components/ErrorMessage';
 import { mainStyles } from '../../constants/styles';
+import { showAlert } from '../../redux/common/actions';
 
 import {
   login
 } from './redux/actions'
 
-const LoginScreen = ({ login,  loading }) => {
+const LoginScreen = ({ navigation, user, login, showAlert, loading }) => {
   const { control, handleSubmit, errors } = useForm();
+
+  useEffect(() => {
+    if (user) {
+      if (!user.error) {
+        navigation.navigate('mainFlow');
+      } else {
+        showAlert({message: user.message, cancelText: "Aceptar"})
+      }
+    }
+  }, [user]);
 
   const onSubmit = (data) => {
     login(data);
@@ -107,15 +118,17 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({ authRedux }) => {
-  const { loginLoading } = authRedux;
+  const { user, loginLoading } = authRedux;
   return {
-    loading: loginLoading
+    loading: loginLoading,
+    user
   }
 }
 
 export default connect(
   mapStateToProps,
   {
-    login
+    login,
+    showAlert
   }
 )(LoginScreen);

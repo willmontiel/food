@@ -4,7 +4,8 @@ export const colors = {
   orange: '#FA9441',
   white: '#FFFFFF',
   black: '#000000',
-  red: '#F73423'
+  red: '#F73423',
+  grey: 'grey'
 }
 
 //Buttons
@@ -34,7 +35,8 @@ export const mainStyles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    padding: 10
+    padding: 20,
+    marginTop: 20
   },
   rowContainer: {
     flexDirection: "row"

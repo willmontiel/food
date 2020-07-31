@@ -1,17 +1,19 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import { mainStyles, colors } from '../../constants/styles';
 
 const OrdersScreen = () => {
   return (
-    <SafeAreaView forceInset={{ top: 'always' }}>
-      <Text>
-        Orders
-      </Text>
-    </SafeAreaView>
+    <>
+      <View style={styles.container}>
+        <Text style={styles.title}>Mis Órdenes</Text>
+      </View>
+    </>
   )
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  ...mainStyles
+});
 
 export default OrdersScreen;

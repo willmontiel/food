@@ -19,30 +19,36 @@ function* loginRequest({ payload }) {
   try {
     let user = {};
     if (phone === "3137022267") {
-      user = { 
+      user = {
+        name: "William",
+        lastname: "Montiel",
+        indicative: '57',
+        phone: "3137022267",
+        email: "will.montiel@aol.com",
         token: 'snqYjWosG8JBbEIlcPxraEUNAdjjphSlj2tkCHbaIv_LUoFqTN-VfBKvw1L2ZlXXIHTP33o2Ep4q9t8laRK9lJuoYirnfB37RGwJkYD7JDMYxEC2CV5KAB6ME6sVX3Yx',
         mainAddress: "Calle 17 # 33 - 58",
-        addressess: [
-          
+        addresses: [
+          {id: 1, name: "Calle 17 # 33 - 58", city: "Cali"},
+          {id: 2, name: "Dg 23 # 18B - 40", city: "Cali"},
+          {id: 2, name: "Cra 33 # 34A - 65", city: "Palmira"}
         ]
       };
       yield call(set, "token", user.token);
       yield put(loginResult(user));
     } else {
-      console.log("Not equal")
-      yield put(loginResult({error: true, message: "Usuario o contraseña incorrecta", data: ""}));
+      yield put(loginResult({ error: true, message: "Usuario o contraseña incorrecta", data: "" }));
     }
   } catch (e) {
     console.log('loginRequest : ', e);
     yield put(loginResult(null));
-    yield put(showAlert({title: "Error", message: e, cancelText: "Aceptar"}));
+    yield put(showAlert({ title: "Error", message: e, cancelText: "Aceptar" }));
   }
 }
 
 function* logout() {
   try {
     yield call(remove, "token");
-    navigate('loginFlow');
+    yield put(loginResult(null));
   } catch (e) {
     console.log('logout : ', e);
   }
@@ -50,15 +56,30 @@ function* logout() {
 
 function* autoLogin() {
   try {
+    console.log("autoLogin");
     const token = yield call(get, "token");
     if (token) {
-      yield put(loginResult({ token }));
-      navigate('mainFlow');
+      yield put(loginResult({
+        name: "William",
+        lastname: "Montiel",
+        indicative: '57',
+        phone: "3137022267",
+        email: "will.montiel@aol.com",
+        token: token,
+        mainAddress: "Calle 17 # 33 - 58",
+        addresses: [
+          {id: 1, name: "Calle 17 # 33 - 58", city: "Cali"},
+          {id: 2, name: "Dg 23 # 18B - 40", city: "Cali"},
+          {id: 2, name: "Cra 33 # 34A - 65", city: "Palmira"}
+        ]
+      }));
     } else {
-      navigate('loginFlow');
+      yield put(loginResult(null));
     }
   } catch (e) {
     console.log('autoLogin : ', e);
+    yield put(loginResult(null));
+    yield put(showAlert({ title: "Error", message: e, cancelText: "Aceptar" }));
   }
 }
 

@@ -7,7 +7,7 @@ export const clientPOST = async (method, params, forceUrl = false) => {
   const token = await get('token');
   let headers = { 'Content-Type': 'application/json' };
   if (!token) {
-    navigate('loginFlow');
+    navigate('LoginStack');
   } 
 
   headers = { ...headers, 'Authorization': `Bearer ${token}`}
@@ -33,7 +33,7 @@ export const clientGET = async (method, params, forceUrl = false) => {
   
   let headers = {};
   if (!token) {
-    navigate('loginFlow');
+    navigate('LoginStack');
   }
 
   headers = { ...headers, 'Authorization': `Bearer ${token}`}

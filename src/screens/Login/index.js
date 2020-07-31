@@ -13,18 +13,21 @@ import { mainStyles } from '../../constants/styles';
 import { showAlert } from '../../redux/common/actions';
 
 import {
-  login
+  login,
+  autoLogin
 } from './redux/actions'
 
-const LoginScreen = ({ navigation, user, login, showAlert, loading }) => {
+const LoginScreen = ({ navigation, user, login, autoLogin, showAlert, loading }) => {
   const { control, handleSubmit, errors } = useForm();
 
   useEffect(() => {
-    if (user) {
+    autoLogin();
+  }, []);
+  
+  useEffect(() => {
+    if (user && user.error) {
       if (!user.error) {
-        navigation.navigate('mainFlow');
-      } else {
-        showAlert({message: user.message, cancelText: "Aceptar"})
+        showAlert({message: user.message, cancelText: "Aceptar"});
       }
     }
   }, [user]);
@@ -81,12 +84,6 @@ const LoginScreen = ({ navigation, user, login, showAlert, loading }) => {
   )
 }
 
-LoginScreen.navigationOptions = () => {
-  return {
-    header: () => false,
-  };
-};
-
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
@@ -129,6 +126,7 @@ export default connect(
   mapStateToProps,
   {
     login,
-    showAlert
+    showAlert,
+    autoLogin
   }
 )(LoginScreen);

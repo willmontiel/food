@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import SafeAreaView from 'react-native-safe-area-view';
 
-const PlaceDetailScreen = () => {
+const OrderDetailScreen = () => {
   return (
-    <SafeAreaView forceInset={{ top: 'always' }}>
+    <SafeAreaView forceInset={{top: 'always'}}>
       <Text>
-        Place
+        Orders
       </Text>
     </SafeAreaView>
   )
@@ -14,4 +14,4 @@ const PlaceDetailScreen = () => {
 
 const styles = StyleSheet.create({});
 
-export default PlaceDetailScreen;
+export default OrderDetailScreen;

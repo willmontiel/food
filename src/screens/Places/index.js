@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   SafeAreaView
 } from 'react-native';
-
+import { IconButton } from 'react-native-paper';
 import { FontAwesome } from '@expo/vector-icons';
 
 //Custom
@@ -22,8 +22,20 @@ import {
   searchPlaces
 } from './redux/actions'
 
-const PlacesScreen = ({ searchPlaces, places, loading, navigation }) => {
+const PlacesScreen = ({ route, searchPlaces, places, loading, navigation }) => {
   const [searchText, setSearchText] = useState("");
+
+  console.log("Route:", route.params)
+
+  const { category } = route.params;
+
+  console.log("category:", category)
+  useEffect(() => {
+    if (category) {
+      searchPlaces({ categories: category })
+    }
+  }, [category])
+
   const categories = [
     { id: "hotdogs", name: "Fritanga", imageUrl: "https://www.santanderalextremo.com/wp-content/uploads/2019/05/fritanga-giron.jpg" },
     { id: "chicken_wings", name: "Pollo", imageUrl: "https://www.hola.com/imagenes/cocina/recetas/20190729146642/pollo-asado-al-horno-con-tomillo/0-705-707/pollo-asado-horno-tomillo-m.jpg" },
@@ -38,20 +50,33 @@ const PlacesScreen = ({ searchPlaces, places, loading, navigation }) => {
   return (
     <>
       <View style={{ flex: 1, marginTop: 20 }}>
-        <View style={{ padding: 10 }}>
-          <SearchBar
-            placeholder="Buscar..."
-            lightTheme
-            onChangeText={(text) => {
-              setSearchText(text);
-              if (text.length > 3) {
-                searchPlaces({ searchText: text })
-              }
-            }}
-            inputContainerStyle={{ backgroundColor: 'white', borderRadius: 5 }}
-            containerStyle={{ backgroundColor: 'transparent', borderTopWidth: 0, borderBottomWidth: 0 }}
-            value={searchText}
-            showLoading={loading}
+        <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10 }}>
+          <IconButton
+            icon="arrow-left"
+            onPress={() => navigation.navigate('Home')}
+          />
+
+          <View style={{flex: 1}}>
+            <SearchBar
+              placeholder="Buscar..."
+              lightTheme
+              onChangeText={(text) => {
+                setSearchText(text);
+                if (text.length > 3) {
+                  searchPlaces({ searchText: text })
+                }
+              }}
+              inputContainerStyle={{ backgroundColor: 'white', borderRadius: 5 }}
+              containerStyle={{ backgroundColor: 'transparent', borderTopWidth: 0, borderBottomWidth: 0 }}
+              value={searchText}
+              showLoading={loading}
+            />
+          </View>
+
+          <IconButton
+            icon="filter"
+            onPress={() => console.log('Pressed')}
+            animated={true}
           />
         </View>
 

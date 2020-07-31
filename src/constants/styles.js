@@ -5,7 +5,7 @@ export const colors = {
   white: '#FFFFFF',
   black: '#000000',
   red: '#F73423',
-  grey: 'grey'
+  grey: 'rgba(0,0,0,0.1)'
 }
 
 //Buttons
@@ -46,6 +46,9 @@ export const mainStyles = StyleSheet.create({
   },
   spaceBetween: {
     justifyContent: 'space-between'
+  },
+  title: {
+    fontSize: 24
   },
   ...inputs,
   ...buttons

@@ -45,7 +45,7 @@ const LoginScreen = ({ navigation, user, login, autoLogin, showAlert, loading })
         <View style={styles.coverContent}>
           <View style={styles.formContainer}>
             <Image
-              source={require('../../assets/images/logo.png')}
+              source={require('../../assets/images/logo_transparent.png')}
               style={styles.logo}
             />
             <Row>
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: 150,
-    height: 60,
+    height: 100,
     alignSelf: 'center',
     margin: 10
   },

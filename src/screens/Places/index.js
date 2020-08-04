@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import {
-  ActivityIndicator,
   View,
   Image,
   Text,
   StyleSheet,
   FlatList,
-  TouchableOpacity,
-  SafeAreaView
+  TouchableOpacity
 } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { FontAwesome } from '@expo/vector-icons';
@@ -25,11 +23,7 @@ import {
 const PlacesScreen = ({ route, searchPlaces, places, loading, navigation }) => {
   const [searchText, setSearchText] = useState("");
 
-  console.log("Route:", route.params)
-
   const { category } = route.params;
-
-  console.log("category:", category)
   useEffect(() => {
     if (category) {
       searchPlaces({ categories: category })
@@ -112,7 +106,7 @@ const PlacesScreen = ({ route, searchPlaces, places, loading, navigation }) => {
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => {
               return (
-                <TouchableOpacity onPress={() => navigation.navigate('PlaceDetail', { id: item.id })}>
+                <TouchableOpacity onPress={() => navigation.navigate('Place', { id: item.id })}>
                   <View style={styles.placeContainer}>
                     <Image
                       source={{ uri: item.image_url }}

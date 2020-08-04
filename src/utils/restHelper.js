@@ -38,7 +38,7 @@ export const clientGET = async (method, params, forceUrl = false) => {
 
   headers = { ...headers, 'Authorization': `Bearer ${token}`}
   let url = forceUrl ? method : baseURL + "/" + method;
-  
+
   return await axios({
     method: 'get',
     url: url,

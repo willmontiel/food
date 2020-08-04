@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { 
-  View, 
-  Text, 
-  ImageBackground, 
-  Image, 
-  StyleSheet, 
-  ActivityIndicator, 
+import {
+  View,
+  Text,
+  ImageBackground,
+  Image,
+  StyleSheet,
+  ActivityIndicator,
   FlatList,
   TouchableOpacity
 } from 'react-native';
@@ -133,15 +133,37 @@ const PlaceScreen = ({ route, getPlace, place, loading, navigation }) => {
                   <TouchableOpacity onPress={() => {
 
                   }}>
-                    <View style={{ flexDirection: "row" }}>
-                      <View>
-                        <Text>{item.name}</Text>
-                        <Text>{item.description}</Text>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: 'space-between',
+                        backgroundColor: colors.white,
+                        height: 120,
+                        borderBottomWidth: 1,
+                        borderBottomColor: colors.grey,
+                        padding: 12,
+                        borderRadius: 5,
+                        marginHorizontal: 8,
+                        marginTop: 8
+                      }}
+                    >
+                      <View style={{ flex: 1, flexDirection: "column", justifyContent: 'space-between' }}>
+                        <View style={{paddingRight: 10}}>
+                          <Text style={{ fontSize: 18, fontWeight: 'bold', flexWrap: 'wrap' }}>{item.name}</Text>
+                          <Text numberOfLines={2} style={{ fontSize: 12 }}>
+                              {item.description}
+                          </Text>
+                        </View>
+
+                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+                          ${item.price}
+                        </Text>
                       </View>
-                      <View>
+
+                      <View style={{alignSelf: 'center',}}>
                         <Image
                           source={{ uri: item.imageUrl }}
-                          style={{ width: 60, height: 60, borderRadius: 5 }}
+                          style={{ width: 80, height: 80, borderRadius: 5 }}
                         />
                       </View>
                     </View>
@@ -159,9 +181,9 @@ const PlaceScreen = ({ route, getPlace, place, loading, navigation }) => {
 const styles = StyleSheet.create({
   ...mainStyles,
   title: {
-    fontSize: 20,
+    fontSize: 22,
     color: colors.black,
-    paddingBottom: 5,
+    paddingBottom: 10,
   },
   bannerContainer: {
     width: '100%',
@@ -182,7 +204,9 @@ const styles = StyleSheet.create({
     fontSize: 14
   },
   productsContainer: {
-
+    flex: 1,
+    backgroundColor: '#ddd',
+    paddingBottom: 8
   }
 });
 

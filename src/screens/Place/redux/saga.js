@@ -15,13 +15,13 @@ import {
 function* getPlaceRequest({ payload }) {
   const { id } = payload;
   try {
-    /*
     let response = yield call(
       clientGET,
       id,
       {}
     );
-    */
+    
+    /*
     let response = {
       "id": "jw7wkWmTX04fRYLcp9vlPQ",
       "alias": "falafels-drive-in-san-jose",
@@ -48,85 +48,13 @@ function* getPlaceRequest({ payload }) {
         }
       ],
       "rating": 4.0,
-      "location": {
-        "address1": "2301 Stevens Creek Blvd",
-        "address2": "",
-        "address3": "",
-        "city": "San Jose",
-        "zip_code": "95128",
-        "country": "US",
-        "state": "CA",
-        "display_address": [
-          "2301 Stevens Creek Blvd",
-          "San Jose, CA 95128"
-        ],
-        "cross_streets": ""
-      },
-      "coordinates": {
-        "latitude": 37.32365,
-        "longitude": -121.93503
-      },
-      "photos": [
-        "https://s3-media2.fl.yelpcdn.com/bphoto/tUkHArroX8_frD9qOoOhvg/o.jpg",
-        "https://s3-media4.fl.yelpcdn.com/bphoto/8tIgRgMnbFWRpEtJLhunmg/o.jpg",
-        "https://s3-media3.fl.yelpcdn.com/bphoto/bpjIopvXjrrfAm7tyZY3mA/o.jpg"
-      ],
       "price": "$",
-      "hours": [
-        {
-          "open": [
-            {
-              "is_overnight": false,
-              "start": "1000",
-              "end": "2000",
-              "day": 0
-            },
-            {
-              "is_overnight": false,
-              "start": "1000",
-              "end": "2000",
-              "day": 1
-            },
-            {
-              "is_overnight": false,
-              "start": "1000",
-              "end": "2000",
-              "day": 2
-            },
-            {
-              "is_overnight": false,
-              "start": "1000",
-              "end": "2000",
-              "day": 3
-            },
-            {
-              "is_overnight": false,
-              "start": "1000",
-              "end": "2000",
-              "day": 4
-            },
-            {
-              "is_overnight": false,
-              "start": "1000",
-              "end": "2000",
-              "day": 5
-            },
-            {
-              "is_overnight": false,
-              "start": "1000",
-              "end": "1800",
-              "day": 6
-            }
-          ],
-          "hours_type": "REGULAR",
-          "is_open_now": true
-        }
-      ],
       "transactions": [
         "delivery",
         "pickup"
       ]
     };
+    */
 
     response.products = [
       {
@@ -134,7 +62,7 @@ function* getPlaceRequest({ payload }) {
         name: "Pollo asado",
         imageUrl: "https://www.hola.com/imagenes/cocina/recetas/20200130159403/pollo-asado-en-horno-de-lena/0-779-940/pollo-asado-m.jpg",
         price: 18000,
-        description: "Pollo asado completo, papa cocida, maduro y arepa"
+        description: "Pollo asado completo, papa cocida, maduro y arepa, Pollo asado completo, papa cocida, maduro y arepa, Pollo asado completo, papa cocida, maduro y arepa"
       },
       {
         id: 2,
@@ -149,10 +77,15 @@ function* getPlaceRequest({ payload }) {
         imageUrl: "https://1.bp.blogspot.com/-JYof8vcPvJM/VdTibG5BIxI/AAAAAAAAAtI/lKYv1cs4v48/s1600/papa%2Baborrajada.jpg",
         price: 4500,
         description: "Papa aborrajada freca con guacamole"
+      },
+      {
+        id: 4,
+        name: "Lechona",
+        imageUrl: "https://cuponassets.cuponatic-latam.com/backendCo/uploads/imagenes_descuentos/137423/6226266bf23a1e98cd37aa401c52bfbca97efa28.XL2.jpg",
+        price: 10000,
+        description: "Lechona con cuero crocante + gaseosa 1.5"
       }
     ]
-
-    console.log("response: ", response);
 
     yield put(getPlaceResult(response));
   } catch (e) {

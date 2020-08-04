@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome } from '@expo/vector-icons';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 //Screens
+import SplashScreen from './screens/Splash';
 import LoginScreen from './screens/Login';
 import AccountScreen from './screens/Account';
 import HomeScreen from './screens/Home';
@@ -92,6 +93,7 @@ const Navigator = (props) => {
           </Tab.Navigator>
         ) : (
             <AuthStack.Navigator headerMode="none" >
+              <AuthStack.Screen name="Splash" component={SplashScreen} />
               <AuthStack.Screen name="Login" component={LoginScreen} />
             </AuthStack.Navigator>
           )}

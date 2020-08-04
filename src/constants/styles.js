@@ -36,7 +36,8 @@ export const mainStyles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     padding: 20,
-    marginTop: 20
+    marginTop: 20,
+    backgroundColor: colors.white
   },
   rowContainer: {
     flexDirection: "row"

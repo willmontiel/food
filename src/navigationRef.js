@@ -8,7 +8,7 @@ export const setNavigator = (nav) => {
 
 export const navigate = (name, params) => {
   navigator.dispatch(
-    CommonActions .navigate({
+    CommonActions.navigate({
       name,
       params
     })

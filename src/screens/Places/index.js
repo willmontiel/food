@@ -50,7 +50,7 @@ const PlacesScreen = ({ route, searchPlaces, places, loading, navigation }) => {
             onPress={() => navigation.navigate('Home')}
           />
 
-          <View style={{flex: 1}}>
+          <View style={{ flex: 1 }}>
             <SearchBar
               placeholder="Buscar..."
               lightTheme
@@ -90,7 +90,7 @@ const PlacesScreen = ({ route, searchPlaces, places, loading, navigation }) => {
                       source={{ uri: item.imageUrl }}
                       style={{ width: 60, height: 60, borderRadius: 5 }}
                     />
-                    <Text style={{ fontSize: 12, flexWrap: 'wrap' }}>{item.name}</Text>
+                    <Text style={{ fontSize: 12, flexWrap: 'wrap', alignSelf: 'center' }}>{item.name}</Text>
                   </View>
                 </TouchableOpacity>
               )
@@ -115,29 +115,27 @@ const PlacesScreen = ({ route, searchPlaces, places, loading, navigation }) => {
 
                     <View style={{ ...styles.columnContainer, ...styles.spaceBetween, flex: 1 }}>
                       <View style={styles.nameContainer}>
-                        <View>
-                          <View>
-                            <Text style={styles.name}>{item.name}</Text>
+                        <View style={{ flex: 1, flexDirection: "column", paddingRight: 10 }}>
+                          <View style={{ flexWrap: 'wrap' }}>
+                            <Text numberOfLines={1} style={styles.name}>{item.name}</Text>
                           </View>
 
-                          <View style={{ ...styles.rowContainer, flexWrap: 'wrap' }}>
-                            {item.categories
-                              ?
-                              item.categories.map((category, index) => {
-                                return (
-                                  <Text key={index} style={styles.category}>
-                                    {category.title}
-                                  </Text>
-                                )
-                              })
-                              :
-                              null}
+                          <View style={{ flexWrap: 'wrap' }}>
+                            <Text numberOfLines={2} style={styles.category}>
+                              {item.categories
+                                ?
+                                item.categories.map((category) => {
+                                  return `${category.title} `
+                                })
+                                :
+                                null}
+                            </Text>
                           </View>
                         </View>
 
                         <View>
                           <Text style={styles.rating}>
-                            <FontAwesome name="star" size={14} />  {item.rating}
+                            <FontAwesome name="star" size={14} />  {item.rating && item.rating.toFixed(1)}
                           </Text>
                         </View>
                       </View>

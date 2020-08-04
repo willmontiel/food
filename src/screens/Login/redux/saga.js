@@ -1,4 +1,4 @@
-import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
+import { all, call, fork, put, takeEvery, delay } from 'redux-saga/effects';
 import { set, get, remove } from '../../../utils/storage';
 import { clientPost, clientGet } from '../../../utils/restHelper';
 import { navigate } from '../../../navigationRef';
@@ -56,7 +56,7 @@ function* logout() {
 
 function* autoLogin() {
   try {
-    console.log("autoLogin");
+    yield delay(3000);
     const token = yield call(get, "token");
     if (token) {
       yield put(loginResult({
@@ -75,6 +75,7 @@ function* autoLogin() {
       }));
     } else {
       yield put(loginResult(null));
+      navigate('Login');
     }
   } catch (e) {
     console.log('autoLogin : ', e);

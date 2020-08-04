@@ -39,13 +39,13 @@ const LoginScreen = ({ navigation, user, login, autoLogin, showAlert, loading })
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
-        source={require('../../assets/images/login-background1.jpg')}
+        source={require('../../assets/images/login-background2.png')}
         style={styles.backgroundImage}
       >
         <View style={styles.coverContent}>
           <View style={styles.formContainer}>
             <Image
-              source={require('../../assets/images/logo_transparent.png')}
+              source={require('../../assets/images/logo_transparent2.png')}
               style={styles.logo}
             />
             <Row>
@@ -92,9 +92,10 @@ const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
     resizeMode: "cover",
-    justifyContent: "center"
+    justifyContent: "flex-start"
   },
   coverContent: {
+    marginTop: 180,
     padding: 10,
     flexDirection: "column"
   },

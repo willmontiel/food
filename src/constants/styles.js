@@ -5,7 +5,8 @@ export const colors = {
   white: '#FFFFFF',
   black: '#000000',
   red: '#F73423',
-  grey: 'rgba(0,0,0,0.1)'
+  grey: 'rgba(0,0,0,0.1)',
+  secondaryText: 'rgba(0,0,0,0.7)',
 }
 
 //Buttons

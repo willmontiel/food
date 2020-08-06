@@ -6,6 +6,9 @@ export const colors = {
   black: '#000000',
   red: '#F73423',
   grey: 'rgba(0,0,0,0.1)',
+  darkGrey: '#A0AAB2',
+  brown: '#5E3023',
+  green: '#809848',
   secondaryText: 'rgba(0,0,0,0.7)',
 }
 
@@ -51,6 +54,9 @@ export const mainStyles = StyleSheet.create({
   },
   title: {
     fontSize: 24
+  },
+  divider: {
+    backgroundColor: colors.orange
   },
   ...inputs,
   ...buttons

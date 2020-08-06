@@ -78,7 +78,6 @@ const HomeScreen = ({ showAlert, navigation, user }) => {
           </View>
 
         </View>
-
       </View>
     </>
   )
@@ -95,7 +94,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    marginTop: 20
+    marginTop: 20,
+    backgroundColor: colors.white
   },
   header: {
     flexDirection: 'row',

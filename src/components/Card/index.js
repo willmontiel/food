@@ -1,6 +1,6 @@
 import React, { Children, cloneElement } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
-import { Divider, ListItem } from 'react-native-elements';
+import { View, StyleSheet } from 'react-native';
+import { Divider } from 'react-native-elements';
 import { mainStyles, colors } from '../../constants/styles';
 
 export const Header = (props) => {
@@ -119,9 +119,6 @@ const styles = StyleSheet.create({
     borderColor: colors.orange,
     borderRadius: 5,
     marginVertical: 10
-  },
-  divider: {
-    backgroundColor: colors.orange
   }
 });
 

@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap'
   },
   orderDate: {
-    color: colors.secondaryText
+    color: colors.darkGrey
   },
   actions: {
     flexDirection: 'row',
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   total: { 
-    fontWeight: 'bold' 
+    fontWeight: 'bold'
   }
 });
 

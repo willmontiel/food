@@ -12,6 +12,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { mainStyles, colors } from '../../constants/styles';
 import { logout } from '../Login/redux/actions';
 import { List, IconButton } from 'react-native-paper';
+import { Divider } from 'react-native-elements';
 
 const AccountScreen = ({ navigation, user, logout }) => {
   return (
@@ -25,15 +26,12 @@ const AccountScreen = ({ navigation, user, logout }) => {
           <Text style={{ fontSize: 14 }}>{user && `${user.email}`}</Text>
         </View>
 
+        <Divider style={styles.divider} />
+
         <List.Section
           style={{
-            marginTop: 18,
             marginBottom: 0,
-            paddingLeft: 0,
-            borderBottomWidth: 1,
-            borderBottomColor: colors.grey,
-            borderTopWidth: 1,
-            borderTopColor: colors.grey
+            paddingLeft: 0
           }}
         >
           <List.Subheader
@@ -85,6 +83,8 @@ const AccountScreen = ({ navigation, user, logout }) => {
           />
         </List.Section>
 
+        <Divider style={styles.divider} />
+
         <List.Section
           style={{
             paddingLeft: 0,
@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
   ...mainStyles,
   infoContainer: {
     marginTop: 20,
+    marginBottom: 20,
   }
 });
 

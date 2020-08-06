@@ -13,8 +13,10 @@ import { IconButton } from 'react-native-paper';
 import { FontAwesome } from '@expo/vector-icons';
 
 //Custom
-import { mainStyles } from '../../constants/styles';
+import { mainStyles, colors } from '../../constants/styles';
 import { SearchBar } from 'react-native-elements';
+import ImageAction from '../../components/ImageAction';
+import Card, { Body } from '../../components/Card';
 
 import {
   searchPlaces
@@ -31,23 +33,23 @@ const PlacesScreen = ({ route, searchPlaces, places, loading, navigation }) => {
   }, [category])
 
   const categories = [
-    { id: "hotdogs", name: "Fritanga", imageUrl: "https://www.santanderalextremo.com/wp-content/uploads/2019/05/fritanga-giron.jpg" },
-    { id: "chicken_wings", name: "Pollo", imageUrl: "https://www.hola.com/imagenes/cocina/recetas/20190729146642/pollo-asado-al-horno-con-tomillo/0-705-707/pollo-asado-horno-tomillo-m.jpg" },
-    { id: "meats", name: "Carne", imageUrl: "https://portal.minervafoods.com/files/styles/blog_post_page/public/carne_com_refrigerante_-_blog.jpg?itok=KHH-4Lrf" },
-    { id: "hotdogs", name: "Comida rápida", imageUrl: "https://www.ecestaticos.com/image/clipping/7616cc0f10fe4cdf992130720ce3e7fe/las-039-fast-food-039-mas-caloricas-que-deberias-evitar.jpg" },
-    { id: "meats", name: "Parrilla", imageUrl: "https://elcomercio.pe/resizer/wgzOLm1y_15dAEQNdS9RkyAQwcI=/980x528/smart/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/VL6AJK4OYVG2VPMJNXGI5PE6RM.jpeg" },
-    { id: "driedfruit", name: "Saludable", imageUrl: "https://portal.minervafoods.com/files/styles/blog_post_page/public/carne_com_refrigerante_-_blog.jpg?itok=KHH-4Lrf" },
-    { id: "chocolate", name: "Postres", imageUrl: "https://portal.minervafoods.com/files/styles/blog_post_page/public/carne_com_refrigerante_-_blog.jpg?itok=KHH-4Lrf" },
-    { id: "popcorn", name: "Sanduches", imageUrl: "https://portal.minervafoods.com/files/styles/blog_post_page/public/carne_com_refrigerante_-_blog.jpg?itok=KHH-4Lrf" },
-    { id: "driedfruit", name: "Jugos", imageUrl: "https://portal.minervafoods.com/files/styles/blog_post_page/public/carne_com_refrigerante_-_blog.jpg?itok=KHH-4Lrf" },
+    { id: "hotdogs", name: "Fritanga", source: require('../../assets/images/empanadas.png')},
+    { id: "chicken_wings", name: "Pollo", source: require('../../assets/images/chicken.png') },
+    { id: "meats", name: "Carne", source: require('../../assets/images/roast-beef.png')},
+    { id: "hotdogs", name: "Comida rápida", source: require('../../assets/images/burguer.png')},
+    { id: "driedfruit", name: "Saludable", source: require('../../assets/images/healthy.png')},
+    { id: "chocolate", name: "Postres", source: require('../../assets/images/ice-cream.png')},
+    { id: "driedfruit", name: "Jugos", source: require('../../assets/images/juice.png')},
   ]
+  
   return (
     <>
-      <View style={{ flex: 1, marginTop: 20 }}>
+      <View style={{ flex: 1, paddingVertical: 20, backgroundColor: colors.white }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10 }}>
           <IconButton
             icon="arrow-left"
             onPress={() => navigation.navigate('Home')}
+            color={colors.orange}
           />
 
           <View style={{ flex: 1 }}>
@@ -60,8 +62,8 @@ const PlacesScreen = ({ route, searchPlaces, places, loading, navigation }) => {
                   searchPlaces({ searchText: text })
                 }
               }}
-              inputContainerStyle={{ backgroundColor: 'white', borderRadius: 5 }}
-              containerStyle={{ backgroundColor: 'transparent', borderTopWidth: 0, borderBottomWidth: 0 }}
+              inputContainerStyle={{ backgroundColor: colors.liteGrey, borderRadius: 5 }}
+              containerStyle={{ backgroundColor: colors.white, borderTopWidth: 0, borderBottomWidth: 0 }}
               value={searchText}
               showLoading={loading}
             />
@@ -71,6 +73,7 @@ const PlacesScreen = ({ route, searchPlaces, places, loading, navigation }) => {
             icon="filter"
             onPress={() => console.log('Pressed')}
             animated={true}
+            color={colors.orange}
           />
         </View>
 
@@ -82,22 +85,17 @@ const PlacesScreen = ({ route, searchPlaces, places, loading, navigation }) => {
             keyExtractor={(item) => item.name}
             renderItem={({ item }) => {
               return (
-                <TouchableOpacity onPress={() => {
-                  searchPlaces({ categories: item.id })
-                }}>
-                  <View style={{ marginRight: 15 }}>
-                    <Image
-                      source={{ uri: item.imageUrl }}
-                      style={{ width: 60, height: 60, borderRadius: 5 }}
-                    />
-                    <Text style={{ fontSize: 12, flexWrap: 'wrap', alignSelf: 'center' }}>{item.name}</Text>
-                  </View>
-                </TouchableOpacity>
+                <ImageAction
+                  onPress={() => searchPlaces({ categories: item.id })}
+                  source={item.source}
+                  size="sm"
+                  title={item.name}
+                />
               )
             }}
           />
         </View>
-
+        
         <View style={{ paddingHorizontal: 10 }}>
           <FlatList
             vertical
@@ -107,45 +105,53 @@ const PlacesScreen = ({ route, searchPlaces, places, loading, navigation }) => {
             renderItem={({ item }) => {
               return (
                 <TouchableOpacity onPress={() => navigation.navigate('Place', { id: item.id })}>
-                  <View style={styles.placeContainer}>
-                    <Image
-                      source={{ uri: item.image_url }}
-                      style={styles.image}
-                    />
+                  <Card>
+                    <Body
+                      image={<Image source={{ uri: item.image_url }} style={styles.image} />}
+                      imagePosition="left"
+                    >
+                      <View style={{ flexDirection: 'column', justifyContent: 'space-between', flex: 1 }}>
+                        <View style={styles.nameContainer}>
+                          <View style={{ flex: 1, flexDirection: "column", paddingRight: 10 }}>
+                            <View style={{ flexWrap: 'wrap' }}>
+                              <Text numberOfLines={1} style={styles.name}>{item.name}</Text>
+                            </View>
 
-                    <View style={{ ...styles.columnContainer, ...styles.spaceBetween, flex: 1 }}>
-                      <View style={styles.nameContainer}>
-                        <View style={{ flex: 1, flexDirection: "column", paddingRight: 10 }}>
-                          <View style={{ flexWrap: 'wrap' }}>
-                            <Text numberOfLines={1} style={styles.name}>{item.name}</Text>
+                            <View style={{ flexWrap: 'wrap' }}>
+                              <Text numberOfLines={2} style={styles.category}>
+                                {item.categories
+                                  ?
+                                  item.categories.map((category) => {
+                                    return `${category.title} `
+                                  })
+                                  :
+                                  null}
+                              </Text>
+                            </View>
                           </View>
 
-                          <View style={{ flexWrap: 'wrap' }}>
-                            <Text numberOfLines={2} style={styles.category}>
-                              {item.categories
-                                ?
-                                item.categories.map((category) => {
-                                  return `${category.title} `
-                                })
-                                :
-                                null}
+                          <View>
+                            <Text style={styles.rating}>
+                              <FontAwesome name="star" size={14} style={{ padding: 0}} />  {item.rating && item.rating.toFixed(1)}
                             </Text>
                           </View>
                         </View>
 
-                        <View>
-                          <Text style={styles.rating}>
-                            <FontAwesome name="star" size={14} />  {item.rating && item.rating.toFixed(1)}
-                          </Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                          <Text style={{color: colors.darkGrey}}>{Math.floor(item.distance)} km</Text>
+
+                          <IconButton
+                            icon="heart"
+                            onPress={() => console.log('Pressed')}
+                            animated={true}
+                            size={18}
+                            color={colors.red}
+                            style={{padding: 0, margin: 0}}
+                          />
                         </View>
                       </View>
-
-                      <View style={{ ...styles.rowContainer, ...styles.spaceBetween, marginVertical: 5, marginRight: 8 }}>
-                        <Text>{Math.floor(item.distance)} km</Text>
-                        <FontAwesome name="heart" size={14} />
-                      </View>
-                    </View>
-                  </View>
+                    </Body>
+                  </Card>
                 </TouchableOpacity>
               )
             }}
@@ -165,9 +171,11 @@ PlacesScreen.navigationOptions = () => {
 const styles = StyleSheet.create({
   ...mainStyles,
   categories: {
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 14,
     marginBottom: 10,
-    backgroundColor: 'white'
+    backgroundColor: colors.liteGrey
   },
   placeContainer: {
     flex: 1,
@@ -178,8 +186,7 @@ const styles = StyleSheet.create({
   image: {
     borderRadius: 5,
     width: 100,
-    height: 100,
-    marginRight: 15
+    height: 100
   },
   nameContainer: {
     flex: 1,

@@ -12,10 +12,11 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import { SearchBar } from 'react-native-elements';
+import { SearchBar, Button } from 'react-native-elements';
 import { IconButton } from 'react-native-paper';
 //Custom
 import { mainStyles, colors } from '../../constants/styles';
+import Card, { Body, Footer } from '../../components/Card';
 
 import {
   getPlace
@@ -24,6 +25,8 @@ import {
 const PlaceScreen = ({ route, getPlace, place, loading, navigation }) => {
   const { id } = route.params;
   const [searchText, setSearchText] = useState("");
+
+  console.log("ID: ", id)
 
   useEffect(() => {
     if (id) {
@@ -44,7 +47,7 @@ const PlaceScreen = ({ route, getPlace, place, loading, navigation }) => {
       {
         (place && !loading)
         &&
-        <View style={{ ...styles.container, padding: 0 }}>
+        <View style={{ flex: 1, paddingVertical: 20, backgroundColor: colors.white }}>
           <View style={styles.bannerContainer}>
             <ImageBackground
               source={{ uri: place.image_url }}
@@ -53,7 +56,7 @@ const PlaceScreen = ({ route, getPlace, place, loading, navigation }) => {
               <View style={{ padding: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
                 <IconButton
                   icon="arrow-left"
-                  color={colors.black}
+                  color={colors.orange}
                   style={{ backgroundColor: colors.white }}
                   size={25}
                   onPress={() => navigation.navigate('Places')}
@@ -62,14 +65,14 @@ const PlaceScreen = ({ route, getPlace, place, loading, navigation }) => {
                 <View style={{ flexDirection: 'row' }}>
                   <IconButton
                     icon="share"
-                    color={colors.black}
+                    color={colors.orange}
                     style={{ backgroundColor: colors.white }}
                     onPress={() => navigation.navigate('Places')}
                   />
 
                   <IconButton
                     icon="heart"
-                    color={colors.black}
+                    color={colors.red}
                     style={{ backgroundColor: colors.white }}
                     onPress={() => navigation.navigate('Places')}
                   />
@@ -88,7 +91,7 @@ const PlaceScreen = ({ route, getPlace, place, loading, navigation }) => {
             <View style={styles.descriptionContainer}>
               <View>
                 <Text style={styles.rating}>
-                  <FontAwesome name="star" size={14} />  {place.rating}
+                  <FontAwesome name="star" size={14} color={colors.yellow} />  {place.rating}
                 </Text>
               </View>
 
@@ -107,7 +110,7 @@ const PlaceScreen = ({ route, getPlace, place, loading, navigation }) => {
                   onChangeText={(text) => {
 
                   }}
-                  inputContainerStyle={{ backgroundColor: colors.grey, borderRadius: 5 }}
+                  inputContainerStyle={{ backgroundColor: colors.liteGrey, borderRadius: 5 }}
                   containerStyle={{ backgroundColor: 'transparent', borderTopWidth: 0, borderBottomWidth: 0, paddingLeft: 0, paddingBottom: 0 }}
                   value={searchText}
                   showLoading={false}
@@ -118,6 +121,7 @@ const PlaceScreen = ({ route, getPlace, place, loading, navigation }) => {
                 icon="filter"
                 onPress={() => console.log('Pressed')}
                 animated={true}
+                color={colors.orange}
               />
             </View>
           </View>
@@ -130,44 +134,40 @@ const PlaceScreen = ({ route, getPlace, place, loading, navigation }) => {
               keyExtractor={(item) => item.name}
               renderItem={({ item }) => {
                 return (
-                  <TouchableOpacity onPress={() => {
-
-                  }}>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: 'space-between',
-                        backgroundColor: colors.white,
-                        height: 120,
-                        borderBottomWidth: 1,
-                        borderBottomColor: colors.grey,
-                        padding: 12,
-                        borderRadius: 5,
-                        marginHorizontal: 8,
-                        marginTop: 8
-                      }}
+                  <Card style={{backgroundColor: colors.white}}>
+                    <Body
+                      image={<Image source={{ uri: item.imageUrl }} style={{ width: 80, height: 80, borderRadius: 5 }} />}
+                      imagePosition="right"
                     >
                       <View style={{ flex: 1, flexDirection: "column", justifyContent: 'space-between' }}>
-                        <View style={{paddingRight: 10}}>
+                        <View style={{ paddingRight: 10 }}>
                           <Text style={{ fontSize: 18, fontWeight: 'bold', flexWrap: 'wrap' }}>{item.name}</Text>
                           <Text numberOfLines={2} style={{ fontSize: 12 }}>
-                              {item.description}
+                            {item.description}
                           </Text>
                         </View>
 
-                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-                          ${item.price}
-                        </Text>
-                      </View>
 
-                      <View style={{alignSelf: 'center',}}>
-                        <Image
-                          source={{ uri: item.imageUrl }}
-                          style={{ width: 80, height: 80, borderRadius: 5 }}
+                      </View>
+                    </Body>
+                    <Footer>
+                      <View style={{ flex: 1, flexDirection: "row", justifyContent: 'space-between' }}>
+                        <View>
+                          <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+                            ${item.price}
+                          </Text>
+                        </View>
+
+                        <Button
+                          raised
+                          titleStyle={{ color: colors.orange }}
+                          buttonStyle={{ padding: 0 }}
+                          title="Agregar"
+                          type="clear"
                         />
                       </View>
-                    </View>
-                  </TouchableOpacity>
+                    </Footer>
+                  </Card>
                 )
               }}
             />
@@ -205,8 +205,8 @@ const styles = StyleSheet.create({
   },
   productsContainer: {
     flex: 1,
-    backgroundColor: '#ddd',
-    paddingBottom: 8
+    backgroundColor: colors.liteGrey,
+    padding: 8
   }
 });
 

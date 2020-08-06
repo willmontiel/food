@@ -23,7 +23,17 @@ const HomeScreen = ({ showAlert, navigation, user }) => {
   return (
     <>
       <View style={styles.container}>
-        <Text style={{ paddingHorizontal: 20, paddingTop: 20, fontSize: 24 }}>{user && user.name}</Text>
+        <View style={{ paddingHorizontal: 20, paddingTop: 20, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Text style={{ fontSize: 24 }}>{user && user.name}</Text>
+          <TouchableOpacity
+            onPress={() => {
+
+            }}
+          >
+            <FontAwesome name="bell" size={18} />
+          </TouchableOpacity>
+        </View>
+
         <View style={styles.header}>
           <TouchableOpacity
             style={{ flexDirection: 'row' }}
@@ -33,14 +43,6 @@ const HomeScreen = ({ showAlert, navigation, user }) => {
           >
             <Text style={{ marginRight: 10 }}>{user && user.mainAddress}</Text>
             <FontAwesome name="arrow-circle-o-down" size={20} />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => {
-
-            }}
-          >
-            <FontAwesome name="bell" size={18} />
           </TouchableOpacity>
         </View>
 
@@ -60,10 +62,39 @@ const HomeScreen = ({ showAlert, navigation, user }) => {
 
           <ImageAction
             onPress={() => navigation.navigate('Places', { category: 'chocolate' })}
-            source={require('../../assets/images/cart.jpg')}
+            source={require('../../assets/images/cart.png')}
             size="md"
             title="Tiendas"
           />
+        </View>
+
+        <View style={{ padding: 20 }}>
+          <View style={{ marginBottom: 10 }}>
+            <Text style={{ fontSize: 20 }}>Favoritos <FontAwesome name="heart" size={20} /></Text>
+          </View>
+
+          <View style={styles.favoritesContainer}>
+            <ImageAction
+              onPress={() => navigation.navigate('Place', { id: 'jw7wkWmTX04fRYLcp9vlPQ' })}
+              source={require('../../assets/images/cart.jpg')}
+              size="lg"
+              title="Tiendas"
+            />
+
+            <ImageAction
+              onPress={() => navigation.navigate('Place', { id: 'jw7wkWmTX04fRYLcp9vlPQ' })}
+              source={require('../../assets/images/cart.jpg')}
+              size="lg"
+              title="Tiendas"
+            />
+
+            <ImageAction
+              onPress={() => navigation.navigate('Place', { id: 'jw7wkWmTX04fRYLcp9vlPQ' })}
+              source={require('../../assets/images/cart.jpg')}
+              size="lg"
+              title="Tiendas"
+            />
+          </View>
         </View>
       </View>
     </>
@@ -111,6 +142,10 @@ const styles = StyleSheet.create({
   titlePlace: {
     alignSelf: 'center',
     fontSize: 12
+  },
+  favoritesContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap'
   }
 });
 

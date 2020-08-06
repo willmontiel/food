@@ -8,6 +8,7 @@ export const colors = {
   grey: 'rgba(0,0,0,0.1)',
   liteGrey: '#F5F5F5',
   darkGrey: '#A0AAB2',
+  yellow: '#FFE900',
   brown: '#5E3023',
   green: '#809848',
   secondaryText: 'rgba(0,0,0,0.7)',

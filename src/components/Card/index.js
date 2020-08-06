@@ -79,15 +79,17 @@ const Card = (props) => {
   } else if (props.children.type === Body) {
     body = props.children;
   } else {
-    throw 'No body';
+    //throw 'No body';
   }
 
   const bodyWithProps = Children.map(body, child => {
     return cloneElement(child, { mainProps: props })
   });
 
+  const propsStyle = props.style ? props.style : {};
+
   return (
-    <View style={styles.card}>
+    <View style={{...styles.card, ...propsStyle}}>
       {header && header}
       {bodyWithProps && bodyWithProps}
       {footer && footer}
@@ -118,7 +120,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.orange,
     borderRadius: 5,
-    marginVertical: 10
+    marginBottom: 10
   }
 });
 

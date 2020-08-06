@@ -39,9 +39,8 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   imagePlaceContainer: {
-    borderColor: colors.grey,
-    borderWidth: 1,
-    borderRadius: 5
+    borderRadius: 5,
+    alignItems: 'center'
   },
   imageExtraSmall: {
     width: 35,
@@ -61,7 +60,9 @@ const styles = StyleSheet.create({
     height: 90
   },
   image: {
-    borderRadius: 5
+    borderRadius: 5,
+    
+    borderRadius: 5,
   },
   title: {
     alignSelf: 'center',

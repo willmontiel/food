@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
-import { ListItem } from 'react-native-elements';
-import { Button } from 'react-native-elements';
+import { ListItem, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
 //Custom
@@ -22,7 +21,10 @@ const OrdersScreen = (props) => {
   return (
     <>
       <View style={styles.container}>
-        <Text style={styles.title}>Mis Órdenes</Text>
+        <View style={{ marginBottom: 20 }}>
+          <Text style={styles.title}>Mis Órdenes</Text>
+        </View>
+
 
         <View>
           <FlatList
@@ -117,7 +119,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center'
   },
-  total: { 
+  total: {
     fontWeight: 'bold'
   }
 });

@@ -6,11 +6,11 @@ import { FontAwesome } from '@expo/vector-icons';
 //Custom
 import { mainStyles, colors } from '../../constants/styles';
 import ImageCarousel from '../../components/ImageCarousel';
+import ImageAction from '../../components/ImageAction';
 //Actions
 import {
   showAlert
 } from '../../redux/common/actions';
-import { color } from 'react-native-reanimated';
 
 const IMAGES = [
   "https://images.unsplash.com/photo-1490818387583-1baba5e638af",
@@ -51,32 +51,19 @@ const HomeScreen = ({ showAlert, navigation, user }) => {
         </View>
 
         <View style={styles.placesContainer}>
-          <View style={styles.place}>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('Places', {category: 'hotdogs'});
-              }}
-            >
-              <View style={styles.imagePlaceContainer}>
-                <Image style={styles.imagePlace} source={require('../../assets/images/restaurants.png')} />
-              </View>
-            </TouchableOpacity>
-            <Text style={styles.titlePlace}>Restaurantes</Text>
-          </View>
+          <ImageAction
+            onPress={() => navigation.navigate('Places', { category: 'hotdogs' })}
+            source={require('../../assets/images/burguer.png')}
+            size="md"
+            title="Restaurantes"
+          />
 
-          <View style={styles.place}>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('Places', {category: 'chocolate'});
-              }}
-            >
-              <View style={styles.imagePlaceContainer}>
-                <Image style={styles.imagePlace} source={require('../../assets/images/stores.png')} />
-              </View>
-            </TouchableOpacity>
-            <Text style={styles.titlePlace}>Tiendas</Text>
-          </View>
-
+          <ImageAction
+            onPress={() => navigation.navigate('Places', { category: 'chocolate' })}
+            source={require('../../assets/images/cart.jpg')}
+            size="md"
+            title="Tiendas"
+          />
         </View>
       </View>
     </>

@@ -1,59 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import { mainStyles, colors } from '../../constants/styles';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
 //Custom
 import Card, { Body, Footer } from '../../components/Card';
+import { mainStyles, colors } from '../../constants/styles';
+//Actions
+import {
+  getOrders
+} from './redux/actions'
 
-const orders = [
-  {
-    id: 1,
-    place: {
-      id: 1,
-      name: "Fritanga Doña Mary",
-      imageUrl: "https://www.santanderalextremo.com/wp-content/uploads/2019/05/fritanga-giron.jpg"
-    },
-    date: "2020-08-05 14:00:00",
-    products: [{
-      id: 1,
-      name: 'Empanadas x 6',
-      price: 4500,
-      cant: 1
-    }],
-    status: "Entregado",
-    total: 4500
-  },
-  {
-    id: 2,
-    place: {
-      id: 1,
-      name: "Panadería Tahona",
-      imageUrl: "https://portal.minervafoods.com/files/styles/blog_post_page/public/carne_com_refrigerante_-_blog.jpg?itok=KHH-4Lrf"
-    },
-    date: "2020-08-04 08:00:00",
-    products: [
-      {
-        id: 3,
-        name: 'Buñuelos x 6',
-        price: 2500,
-        cant: 2
-      },
-      {
-        id: 3,
-        name: 'Buñuelos x 6',
-        price: 2500,
-        cant: 2
-      }
-    ],
-    status: "Entregado",
-    total: 5000
-  }
-]
+const OrdersScreen = (props) => {
+  useEffect(() => {
+    props.getOrders();
+  }, []);
 
-const OrdersScreen = () => {
   return (
     <>
       <View style={styles.container}>
@@ -63,11 +28,11 @@ const OrdersScreen = () => {
           <FlatList
             vertical
             showsVerticalScrollIndicator={false}
-            data={orders}
+            data={props.orders}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => {
               return (
-                <TouchableOpacity onPress={() => console.log("Hi!")}>
+                <TouchableOpacity onPress={() => props.navigation.navigate('Order', { id: item.id })}>
                   <Card>
                     <Body
                       image={<Image source={{ uri: item.place.imageUrl }} style={styles.placeImage} />}
@@ -157,4 +122,17 @@ const styles = StyleSheet.create({
   }
 });
 
-export default OrdersScreen;
+const mapStateToProps = ({ ordersRedux }) => {
+  const { orders, ordersLoading } = ordersRedux;
+  return {
+    orders: orders,
+    loading: ordersLoading
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  {
+    getOrders
+  }
+)(OrdersScreen);

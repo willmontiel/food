@@ -4,7 +4,7 @@ import {
 } from './actionTypes';
 
 const INIT_STATE = {
-  place: [],
+  place: null,
   placeLoading: false
 }
 

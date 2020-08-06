@@ -6,6 +6,7 @@ export const colors = {
   black: '#000000',
   red: '#F73423',
   grey: 'rgba(0,0,0,0.1)',
+  liteGrey: '#F5F5F5',
   darkGrey: '#A0AAB2',
   brown: '#5E3023',
   green: '#809848',
@@ -39,8 +40,9 @@ export const mainStyles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    padding: 20,
-    marginTop: 20,
+    paddingHorizontal: 20,
+    paddingTop: 30,
+    paddingBottom: 20,
     backgroundColor: colors.white
   },
   rowContainer: {

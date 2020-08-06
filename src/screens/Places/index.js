@@ -105,7 +105,7 @@ const PlacesScreen = ({ route, searchPlaces, places, loading, navigation }) => {
             renderItem={({ item }) => {
               return (
                 <TouchableOpacity onPress={() => navigation.navigate('Place', { id: item.id })}>
-                  <Card>
+                  <Card style={{borderColor: 'white'}}>
                     <Body
                       image={<Image source={{ uri: item.image_url }} style={styles.image} />}
                       imagePosition="left"
@@ -132,7 +132,7 @@ const PlacesScreen = ({ route, searchPlaces, places, loading, navigation }) => {
 
                           <View>
                             <Text style={styles.rating}>
-                              <FontAwesome name="star" size={14} style={{ padding: 0}} />  {item.rating && item.rating.toFixed(1)}
+                              <FontAwesome name="star" size={14} style={{ padding: 0}} color={colors.yellow} />  {item.rating && item.rating.toFixed(1)}
                             </Text>
                           </View>
                         </View>

@@ -55,19 +55,24 @@ const Navigator = (props) => {
           <Tab.Navigator
             initialRouteName="HomeStack"
             tabBarOptions={{
-              activeTintColor: colors.orange,
-              inactiveTintColor: colors.darkGrey,
-              //activeBackgroundColor : colors.brown,
+              activeTintColor: colors.white,
+              inactiveTintColor: colors.orange,
+              activeBackgroundColor : colors.orange,
               style: {
-                paddingTop: 8,
                 borderTopColor: colors.orange,
                 borderTopStartRadius: 20,
                 borderStartColor: colors.orange,
                 borderLeftWidth: 1,
                 borderTopEndRadius: 20,
                 borderRightWidth: 1,
+                borderRightColor: colors.orange,
                 borderEndColor: colors.orange,
-                backgroundColor: 'white'
+                backgroundColor: colors.white,
+              },
+              tabStyle: {
+                paddingTop: 8,
+                borderTopEndRadius: 20,
+                borderTopStartRadius: 20,
               },
               labelStyle: {
                 fontSize: 13,

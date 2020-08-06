@@ -70,7 +70,7 @@ const HomeScreen = ({ showAlert, navigation, user }) => {
 
         <View style={{ padding: 20 }}>
           <View style={{ marginBottom: 10 }}>
-            <Text style={{ fontSize: 20 }}>Favoritos <FontAwesome name="heart" size={20} /></Text>
+            <Text style={{ fontSize: 20, color: colors.darkGrey, fontWeight: 'bold' }}>Favoritos <FontAwesome name="heart" size={20} color={colors.red} /></Text>
           </View>
 
           <View style={styles.favoritesContainer}>
